@@ -1,53 +1,42 @@
-import java.util.Scanner;
+public class Cliente {
 
-public class Banco {
+    private String nome;
+    private String tipoConta;
+    private double saldo;
 
-    public static void main(String[] args) {
+    public Cliente(String nome, String tipoConta, double saldoInicial) {
+        this.nome = nome;
+        this.tipoConta = tipoConta;
+        this.saldo = saldoInicial;
+    }
 
-        Scanner scanner = new Scanner(System.in);
-
-        Cliente cliente = new Cliente("Luiz", "Corrente", 0);
-
-        int opcao = 0;
-
-        while (opcao != 4) {
-
-            System.out.println("\n=== MENU ===");
-            System.out.println("1 - Consultar saldo");
-            System.out.println("2 - Depositar");
-            System.out.println("3 - Sacar");
-            System.out.println("4 - Sair");
-            System.out.print("Escolha uma opção: ");
-
-            opcao = scanner.nextInt();
-
-            switch (opcao) {
-
-                case 1:
-                    System.out.println("Saldo atual: R$ " + cliente.getSaldo());
-                    break;
-
-                case 2:
-                    System.out.print("Digite o valor para depósito: ");
-                    double deposito = scanner.nextDouble();
-                    cliente.depositar(deposito);
-                    break;
-
-                case 3:
-                    System.out.print("Digite o valor para saque: ");
-                    double saque = scanner.nextDouble();
-                    cliente.sacar(saque);
-                    break;
-
-                case 4:
-                    System.out.println("Encerrando sistema...");
-                    break;
-
-                default:
-                    System.out.println("Opção inválida.");
-            }
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+            System.out.println("Depósito realizado com sucesso.");
+        } else {
+            System.out.println("Valor inválido.");
         }
+    }
 
-        scanner.close();
+    public void sacar(double valor) {
+        if (valor <= 0) {
+            System.out.println("Valor inválido.");
+        } else if (valor > saldo) {
+            System.out.println("Saldo insuficiente.");
+        } else {
+            saldo -= valor;
+            System.out.println("Saque realizado com sucesso.");
+        }
+    }
+
+    public void exibirDados() {
+        System.out.println("Nome do Cliente: " + nome);
+        System.out.println("Tipo de Conta: " + tipoConta);
+        System.out.println("Saldo Atual: R$ " + saldo);
+    }
+
+    public double getSaldo() {
+        return saldo;
     }
 }
