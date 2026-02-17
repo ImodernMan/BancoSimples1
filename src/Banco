@@ -4,30 +4,22 @@ public class Banco {
 
     public static void main(String[] args) {
 
-        Scanner leitura = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        Cliente cliente = new Cliente("Edson Da Silva", "Corrente", 1000.0);
+        Cliente cliente = new Cliente("Luiz", "Corrente", 0);
 
         int opcao = 0;
 
-        System.out.println("***************************************");
-        cliente.exibirDados();
-        System.out.println("***************************************");
-
-        String menu = """
-                
-                *** MENU ***
-                1 - Consultar Saldo
-                2 - Sacar
-                3 - Depositar
-                4 - Sair
-                """;
-
         while (opcao != 4) {
 
-            System.out.println(menu);
-            System.out.print("Digite a opção desejada: ");
-            opcao = leitura.nextInt();
+            System.out.println("\n=== MENU ===");
+            System.out.println("1 - Consultar saldo");
+            System.out.println("2 - Depositar");
+            System.out.println("3 - Sacar");
+            System.out.println("4 - Sair");
+            System.out.print("Escolha uma opção: ");
+
+            opcao = scanner.nextInt();
 
             switch (opcao) {
 
@@ -36,15 +28,15 @@ public class Banco {
                     break;
 
                 case 2:
-                    System.out.print("Valor para saque: ");
-                    double valorSaque = leitura.nextDouble();
-                    cliente.sacar(valorSaque);
+                    System.out.print("Digite o valor para depósito: ");
+                    double deposito = scanner.nextDouble();
+                    cliente.depositar(deposito);
                     break;
 
                 case 3:
-                    System.out.print("Valor para depósito: ");
-                    double valorDeposito = leitura.nextDouble();
-                    cliente.depositar(valorDeposito);
+                    System.out.print("Digite o valor para saque: ");
+                    double saque = scanner.nextDouble();
+                    cliente.sacar(saque);
                     break;
 
                 case 4:
@@ -56,6 +48,6 @@ public class Banco {
             }
         }
 
-        leitura.close();
+        scanner.close();
     }
 }
